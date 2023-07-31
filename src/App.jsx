@@ -16,6 +16,7 @@ import {
   Box,
   Textarea,
   Button,
+  Center,
 } from "@chakra-ui/react";
 
 function App() {
@@ -215,14 +216,38 @@ function App() {
                   </AccordionPanel>
                 </AccordionItem>
               </Accordion>
-              <Button colorScheme="blue" size={"sm"} width={"140px"}>
-                + Add Education
+              <Button colorScheme="blue" size={"sm"} width={"180px"}>
+                + Add Work Experience
+              </Button>
+            </Card>
+
+            <Card p={"20px"}>
+              <Heading as="h1" size="lg" mb="20px">
+                Skills
+              </Heading>
+
+              <Flex flexDir={"column"} gap={"20px"} mb={"20px"}>
+                <Flex gap={"12px"}>
+                  <Input placeholder=" " variant="outline" bg={"gray.50"} />
+                  <Button colorScheme="red">Remove</Button>
+                </Flex>
+
+              </Flex>
+              <Button colorScheme="blue" size={"sm"} width={"100px"}>
+                + Add Skill
               </Button>
             </Card>
           </Flex>
         </GridItem>
         <GridItem bg={"gray.700"} as="main" colSpan={{ base: 4 }}>
-          test
+          <Center>
+            <Flex p={"40px"} flexDir={"column"} gap="30px">
+              <Box width={"54vh"} height={"70vh"} bg="white" borderRadius={"6px"}></Box>
+              <Button colorScheme="teal" width={"180px"} alignSelf={"center"}>
+                Download as PDF
+              </Button>
+            </Flex>
+          </Center>
         </GridItem>
       </Grid>
     </>
