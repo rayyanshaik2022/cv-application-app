@@ -1,16 +1,13 @@
-import { Card, Heading, Button, Box } from "@chakra-ui/react";
+import { Card, Heading, Button } from "@chakra-ui/react";
 import SkillsItem from "./SkillsItem";
 import { v4 as uuidv4 } from "uuid";
 import { useState } from "react";
 
 function SkillsCard() {
-  let myId = uuidv4();
 
   const skillsItems = [
     {
-      item: (
-        <SkillsItem skill="" id={myId} />
-      ),
+      skill: "javascript",
       id: uuidv4(),
     },
   ];
@@ -22,13 +19,17 @@ function SkillsCard() {
     setSkillsList([
       ...skillsList,
       {
-        item: (
-          <SkillsItem skill="" id={newId} />
-        ),
+        skill: "",
         id: newId,
       },
     ]);
   };
+
+  let handleRemoveSkill = (id) => {
+    setSkillsList(
+        skillsList.filter(item => item.id != id)
+    );
+  }
 
   return (
     <Card p={"20px"}>
@@ -36,8 +37,8 @@ function SkillsCard() {
         Skills
       </Heading>
 
-      {skillsList.map((skill) => (
-        <Box key={skill.id}>{skill.item}</Box>
+      {skillsList.map((item) => ( 
+        <SkillsItem key={item.id} id={item.id} skill={item.skill} removeHandle={handleRemoveSkill}/>
       ))}
 
       <Button
