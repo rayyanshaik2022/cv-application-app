@@ -18,7 +18,9 @@ import {
 import { useState } from "react";
 
 function EducationItem(props) {
-  const [schoolName, setSchoolName] = useState(props.school == null ? "" : props.school);
+  const [schoolName, setSchoolName] = useState(
+    props.school == null ? "" : props.school
+  );
   let handleSchoolNameChange = (e) => {
     let inputValue = e.target.value;
     setSchoolName(inputValue);
@@ -32,7 +34,7 @@ function EducationItem(props) {
             <AccordionButton>
               <Box as="span" flex="1" textAlign="left">
                 <Heading as="h2" size="sm">
-                {schoolName != "" ? schoolName : "Unknown School"}
+                  {schoolName != "" ? schoolName : "Unknown School"}
                 </Heading>
               </Box>
               <AccordionIcon />
@@ -73,7 +75,12 @@ function EducationItem(props) {
               </FormControl>
             </Grid>
             <Flex mt={"20px"} justifyContent={"right"}>
-              <Button colorScheme="red">Remove</Button>
+              <Button
+                colorScheme="red"
+                onClick={() => {props.removeHandle(props.id)}}
+              >
+                Remove
+              </Button>
             </Flex>
           </AccordionPanel>
         </AccordionItem>
