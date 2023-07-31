@@ -1,4 +1,4 @@
-import { Card, Heading, Button, Box } from "@chakra-ui/react";
+import { Card, Heading, Button } from "@chakra-ui/react";
 import EducationItem from "./EducationItem";
 import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
@@ -6,7 +6,7 @@ import { v4 as uuidv4 } from "uuid";
 function EducationCard() {
   const educationItems = [
     {
-      item: <EducationItem school="University of Pennsylvania" />,
+      school: "University of Pennsylvania",
       id: uuidv4(),
     },
   ];
@@ -16,10 +16,14 @@ function EducationCard() {
     setEduItems([
       ...eduItems,
       {
-        item: <EducationItem/>,
+        item: "",
         id: uuidv4(),
       },
     ]);
+  };
+
+  let handleRemoveItem = (id) => {
+    setEduItems(eduItems.filter((item) => item.id != id));
   };
 
   return (
@@ -28,15 +32,21 @@ function EducationCard() {
         Education
       </Heading>
 
-      {
-        eduItems.map((i) => (
-            <Box key={i.id}>
-                {i.item}
-            </Box>
-        ))
-      }
+      {eduItems.map((item) => (
+        <EducationItem
+          key={item.id}
+          school={item.school}
+          id={item.id}
+          removeHandle={handleRemoveItem}
+        />
+      ))}
 
-      <Button colorScheme="blue" size={"sm"} width={"140px"} onClick={handleAddItem}>
+      <Button
+        colorScheme="blue"
+        size={"sm"}
+        width={"140px"}
+        onClick={handleAddItem}
+      >
         + Add Education
       </Button>
     </Card>

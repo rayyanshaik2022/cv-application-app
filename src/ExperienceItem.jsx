@@ -33,11 +33,11 @@ function ExperienceItem(props) {
 
   function getItemTitle() {
     if (jobTitle != "" && employer != "") {
-        return jobTitle + " @ " + employer;
+      return jobTitle + " @ " + employer;
     }
 
     if (jobTitle != "") {
-        return jobTitle;
+      return jobTitle;
     }
 
     return "Unknown Title";
@@ -50,9 +50,7 @@ function ExperienceItem(props) {
           <AccordionButton>
             <Box as="span" flex="1" textAlign="left">
               <Heading as="h2" size="sm">
-                {
-                    getItemTitle()
-                }
+                {getItemTitle()}
               </Heading>
             </Box>
             <AccordionIcon />
@@ -110,7 +108,14 @@ function ExperienceItem(props) {
             </FormControl>
           </Grid>
           <Flex mt={"20px"} justifyContent={"right"}>
-            <Button colorScheme="red">Remove</Button>
+            <Button
+              colorScheme="red"
+              onClick={() => {
+                props.removeHandle(props.id);
+              }}
+            >
+              Remove
+            </Button>
           </Flex>
         </AccordionPanel>
       </AccordionItem>
