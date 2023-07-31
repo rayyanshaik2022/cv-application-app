@@ -8,16 +8,14 @@ import {
   FormControl,
   FormLabel,
   Flex,
-  Accordion,
-  AccordionItem,
-  AccordionPanel,
-  AccordionButton,
-  AccordionIcon,
   Box,
-  Textarea,
   Button,
   Center,
 } from "@chakra-ui/react";
+
+import ExperienceCard from "./ExperienceCard";
+import SkillsCard from "./SkillsCard";
+import EducationCard from "./EducationCard";
 
 function App() {
   return (
@@ -62,187 +60,21 @@ function App() {
               </Grid>
             </Card>
 
-            <Card p={"20px"}>
-              <Heading as="h1" size="lg" mb="20px">
-                Education
-              </Heading>
-
-              <Accordion defaultIndex={[0]} allowMultiple mb={"20px"}>
-                <AccordionItem>
-                  <h2>
-                    <AccordionButton>
-                      <Box as="span" flex="1" textAlign="left">
-                        <Heading as="h2" size="sm">
-                          University of Pennsylvania
-                        </Heading>
-                      </Box>
-                      <AccordionIcon />
-                    </AccordionButton>
-                  </h2>
-                  <AccordionPanel pb={4} mt={2}>
-                    <Grid
-                      templateColumns="repeat(2, 1fr)"
-                      gap={"30px"}
-                      rowGap={"20px"}
-                    >
-                      <FormControl variant="floating" isRequired>
-                        <Input
-                          placeholder=" "
-                          variant="outline"
-                          bg={"gray.50"}
-                        />
-                        <FormLabel>School</FormLabel>
-                      </FormControl>
-
-                      <FormControl variant="floating">
-                        <Input
-                          placeholder=" "
-                          size="md"
-                          type="date"
-                          variant="outline"
-                          bg={"gray.50"}
-                        />
-                        <FormLabel>Graduation Date</FormLabel>
-                      </FormControl>
-
-                      <FormControl
-                        variant="floating"
-                        gridColumn="1/-1"
-                        isRequired
-                      >
-                        <Input
-                          placeholder=" "
-                          variant="outline"
-                          bg={"gray.50"}
-                        />
-                        <FormLabel>Degree</FormLabel>
-                      </FormControl>
-
-                      <FormControl
-                        variant="floating"
-                        gridColumn="1/-1"
-                        isRequired
-                      >
-                        <Textarea variant="outline" bg={"gray.50"} />
-                        <FormLabel>Description</FormLabel>
-                      </FormControl>
-                    </Grid>
-                    <Flex mt={"20px"} justifyContent={"right"}>
-                      <Button colorScheme="red">Remove</Button>
-                    </Flex>
-                  </AccordionPanel>
-                </AccordionItem>
-              </Accordion>
-              <Button colorScheme="blue" size={"sm"} width={"140px"}>
-                + Add Education
-              </Button>
-            </Card>
-
-            <Card p={"20px"}>
-              <Heading as="h1" size="lg" mb="20px">
-                Work Experience
-              </Heading>
-
-              <Accordion defaultIndex={[0]} allowMultiple mb={"20px"}>
-                <AccordionItem>
-                  <h2>
-                    <AccordionButton>
-                      <Box as="span" flex="1" textAlign="left">
-                        <Heading as="h2" size="sm">
-                          Software Engineer @ Google
-                        </Heading>
-                      </Box>
-                      <AccordionIcon />
-                    </AccordionButton>
-                  </h2>
-                  <AccordionPanel pb={4} mt={2}>
-                    <Grid
-                      templateColumns="repeat(2, 1fr)"
-                      gap={"30px"}
-                      rowGap={"20px"}
-                    >
-                      <FormControl variant="floating" isRequired>
-                        <Input
-                          placeholder=" "
-                          variant="outline"
-                          bg={"gray.50"}
-                        />
-                        <FormLabel>Job Title</FormLabel>
-                      </FormControl>
-
-                      <FormControl variant="floating" isRequired>
-                        <Input
-                          placeholder=" "
-                          variant="outline"
-                          bg={"gray.50"}
-                        />
-                        <FormLabel>Employer</FormLabel>
-                      </FormControl>
-
-                      <FormControl variant="floating">
-                        <Input
-                          placeholder=" "
-                          size="md"
-                          type="date"
-                          variant="outline"
-                          bg={"gray.50"}
-                        />
-                        <FormLabel>Start Date</FormLabel>
-                      </FormControl>
-
-                      <FormControl variant="floating">
-                        <Input
-                          placeholder=" "
-                          size="md"
-                          type="date"
-                          variant="outline"
-                          bg={"gray.50"}
-                        />
-                        <FormLabel>End Date</FormLabel>
-                      </FormControl>
-
-                      <FormControl
-                        variant="floating"
-                        gridColumn="1/-1"
-                        isRequired
-                      >
-                        <Textarea variant="outline" bg={"gray.50"} />
-                        <FormLabel>Description</FormLabel>
-                      </FormControl>
-                    </Grid>
-                    <Flex mt={"20px"} justifyContent={"right"}>
-                      <Button colorScheme="red">Remove</Button>
-                    </Flex>
-                  </AccordionPanel>
-                </AccordionItem>
-              </Accordion>
-              <Button colorScheme="blue" size={"sm"} width={"180px"}>
-                + Add Work Experience
-              </Button>
-            </Card>
-
-            <Card p={"20px"}>
-              <Heading as="h1" size="lg" mb="20px">
-                Skills
-              </Heading>
-
-              <Flex flexDir={"column"} gap={"20px"} mb={"20px"}>
-                <Flex gap={"12px"}>
-                  <Input placeholder=" " variant="outline" bg={"gray.50"} />
-                  <Button colorScheme="red">Remove</Button>
-                </Flex>
-
-              </Flex>
-              <Button colorScheme="blue" size={"sm"} width={"100px"}>
-                + Add Skill
-              </Button>
-            </Card>
+            <EducationCard />
+            <ExperienceCard />
+            <SkillsCard />
+            
           </Flex>
         </GridItem>
         <GridItem bg={"gray.700"} as="main" colSpan={{ base: 4 }}>
           <Center>
             <Flex p={"40px"} flexDir={"column"} gap="30px">
-              <Box width={"54vh"} height={"70vh"} bg="white" borderRadius={"6px"}></Box>
+              <Box
+                width={"54vh"}
+                height={"70vh"}
+                bg="white"
+                borderRadius={"6px"}
+              ></Box>
               <Button colorScheme="teal" width={"180px"} alignSelf={"center"}>
                 Download as PDF
               </Button>
