@@ -9,8 +9,8 @@ function SkillsItem(props) {
   let inputHandler = (e) => {
     let val = e.target.value;
     setInputValue(val);
-    props.setSkill({
-      ...props.getSkill(),
+    props.setInfo({
+      ...props.info,
       skill: val,
     });
   };

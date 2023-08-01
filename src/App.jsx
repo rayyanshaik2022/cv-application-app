@@ -21,6 +21,26 @@ import EducationCard from "./EducationCard";
 import Resume from "./Resume";
 import { useState } from "react";
 
+import { jsPDF } from "jspdf";
+
+const doc = new jsPDF();
+console.log(doc);
+function downloadPDF() {
+  // Source HTMLElement or a string containing HTML.
+  var elementHTML = document.querySelector("#cv-box");
+
+  doc.html(elementHTML, {
+    callback: function (doc) {
+      // Save the PDF
+      doc.save("my-cv.pdf");
+    },
+    x: 15,
+    y: 15,
+    width: 260, //target width in the PDF document
+    windowWidth: 650, //window width in CSS pixels
+  });
+}
+
 function App() {
   const [personalInfo, setPersonalInfo] = useState({
     firstName: "",
@@ -157,12 +177,23 @@ function App() {
                 bg="white"
                 borderRadius={"6px"}
                 overflowY={"auto"}
+                id="cv-box"
               >
                 <Resume
-                  info={{ personalInfo, educationInfo, experienceInfo, skillsInfo}}
+                  info={{
+                    personalInfo,
+                    educationInfo,
+                    experienceInfo,
+                    skillsInfo,
+                  }}
                 />
               </Box>
-              <Button colorScheme="teal" width={"180px"} alignSelf={"center"}>
+              <Button
+                colorScheme="teal"
+                width={"340px"}
+                alignSelf={"center"}
+                onClick={downloadPDF}
+              >
                 Download as PDF
               </Button>
             </Flex>
