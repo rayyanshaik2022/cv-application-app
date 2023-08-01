@@ -35,9 +35,9 @@ function downloadPDF() {
       doc.save("my-cv.pdf");
     },
     x: 15,
-    y: 15,
+    y: 0,
     width: 260, //target width in the PDF document
-    windowWidth: 650, //window width in CSS pixels
+    windowWidth: 550, //window width in CSS pixels
   });
 }
 
