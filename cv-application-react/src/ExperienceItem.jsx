@@ -15,23 +15,48 @@ import {
   Button,
 } from "@chakra-ui/react";
 
-import { useState } from "react";
-
 function ExperienceItem(props) {
-  const [jobTitle, setJobTitle] = useState(props.jobTitle);
-  const [employer, setEmployer] = useState(props.Employer);
-
   let handleJobTitleChange = (e) => {
     let inputValue = e.target.value;
-    setJobTitle(inputValue);
+    props.setInfo({
+      ...props.info,
+      jobTitle: inputValue,
+    });
   };
 
   let handleEmployerChange = (e) => {
     let inputValue = e.target.value;
-    setEmployer(inputValue);
+    props.setInfo({
+      ...props.info,
+      employer: inputValue,
+    });
   };
 
-  function getItemTitle() {
+  let handleStartDateChange = (e) => {
+    let inputValue = e.target.value;
+    props.setInfo({
+      ...props.info,
+      startDate: inputValue,
+    });
+  };
+
+  let handleEndDateChange = (e) => {
+    let inputValue = e.target.value;
+    props.setInfo({
+      ...props.info,
+      endDate: inputValue,
+    });
+  };
+
+  let handleDescriptionChange = (e) => {
+    let inputValue = e.target.value;
+    props.setInfo({
+      ...props.info,
+      desc: inputValue,
+    });
+  };
+
+  function getItemTitle(jobTitle, employer) {
     if (jobTitle != "" && employer != "") {
       return jobTitle + " @ " + employer;
     }
@@ -50,7 +75,7 @@ function ExperienceItem(props) {
           <AccordionButton>
             <Box as="span" flex="1" textAlign="left">
               <Heading as="h2" size="sm">
-                {getItemTitle()}
+                {getItemTitle(props.info.jobTitle, props.info.employee)}
               </Heading>
             </Box>
             <AccordionIcon />
@@ -63,7 +88,7 @@ function ExperienceItem(props) {
                 placeholder=" "
                 variant="outline"
                 bg={"gray.50"}
-                value={jobTitle}
+                value={props.info.jobTitle}
                 onChange={handleJobTitleChange}
               />
               <FormLabel>Job Title</FormLabel>
@@ -74,7 +99,7 @@ function ExperienceItem(props) {
                 placeholder=" "
                 variant="outline"
                 bg={"gray.50"}
-                value={employer}
+                value={props.info.employer}
                 onChange={handleEmployerChange}
               />
               <FormLabel>Employer</FormLabel>
@@ -87,6 +112,7 @@ function ExperienceItem(props) {
                 type="date"
                 variant="outline"
                 bg={"gray.50"}
+                onChange={handleStartDateChange}
               />
               <FormLabel>Start Date</FormLabel>
             </FormControl>
@@ -98,12 +124,17 @@ function ExperienceItem(props) {
                 type="date"
                 variant="outline"
                 bg={"gray.50"}
+                onChange={handleEndDateChange}
               />
               <FormLabel>End Date</FormLabel>
             </FormControl>
 
             <FormControl variant="floating" gridColumn="1/-1" isRequired>
-              <Textarea variant="outline" bg={"gray.50"} />
+              <Textarea
+                variant="outline"
+                bg={"gray.50"}
+                onChange={handleDescriptionChange}
+              />
               <FormLabel>Description</FormLabel>
             </FormControl>
           </Grid>

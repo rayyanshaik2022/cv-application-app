@@ -13,6 +13,9 @@ function ExperienceCard(props) {
       {
         jobTitle: "",
         employer: "",
+        startDate: "",
+        endDate: "",
+        desc: "",
         id: uuidv4(),
       },
     ]);
@@ -35,6 +38,13 @@ function ExperienceCard(props) {
           jobTitle={item.jobTitle}
           employer={item.employer}
           removeHandle={handleRemoveExpItem}
+
+          setInfo={(newObj) => {
+            setExpItems(
+              expItems.map((e) => (e.id === item.id ? newObj : e))
+            )
+          }}
+          info={expItems.find((e) => e.id == item.id)}
         />
       ))}
       <Button

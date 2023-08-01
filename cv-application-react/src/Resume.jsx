@@ -6,7 +6,6 @@ import {
   Flex,
   UnorderedList,
   ListItem,
-  Center,
 } from "@chakra-ui/react";
 
 const MONTHS = [
@@ -24,11 +23,11 @@ const MONTHS = [
   "December",
 ];
 
-function convertDate(date) {
+function convertDate(date, err="Did not graduate") {
   const dateObj = new Date(date);
 
-  if (date == "") {
-    return "Did not graduate";
+  if (date == "" || date == undefined) {
+    return err;
   }
 
   return `${MONTHS[dateObj.getMonth()]} ${dateObj.getFullYear()}`;
@@ -73,6 +72,36 @@ function Resume(props) {
                   </p>
                   <p>
                     <i>{convertDate(item.grad)}</i>
+                  </p>
+                </Flex>
+                <p>{item.desc}</p>
+              </Grid>
+            </ListItem>
+          ))}
+        </UnorderedList>
+
+        <Divider my="5px"></Divider>
+
+        {/* Work Experience */}
+
+        <Heading as="h2" size="lg">
+          Work Experience
+        </Heading>
+
+        <UnorderedList styleType="none">
+          {props.info.experienceInfo.map((item) => (
+            <ListItem mb={2} key={item.id}>
+              <Heading as="h3" size="md" mb={"4px"}>
+                {`${item.jobTitle} at ${item.employer}`}
+              </Heading>
+
+              <Grid templateColumns={"repeat(2, 1fr)"}>
+                <Flex flexDir={"column"}>
+                  <p>
+                    <i>{`Start Date: ${convertDate(item.startDate, "unknown")}`}</i>
+                  </p>
+                  <p>
+                    <i>{`End Date: ${convertDate(item.endDate, "unknown")}`}</i>
                   </p>
                 </Flex>
                 <p>{item.desc}</p>

@@ -33,12 +33,12 @@ function SkillsCard(props) {
           id={item.id}
           skill={item.skill}
           removeHandle={handleRemoveSkill}
-          setSkill={(newObj) => {
+          setInfo={(newObj) => {
             setSkillsList(
               skillsList.map((e) => (e.id === item.id ? newObj : e))
             )
           }}
-          getSkill={skillsList.find((e) => e.id == item.id)}
+          info={skillsList.find((e) => e.id === item.id)}
         />
       ))}
 
