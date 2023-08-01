@@ -13,17 +13,56 @@ import {
   Center,
 } from "@chakra-ui/react";
 
+import { v4 as uuidv4 } from "uuid";
+
 import ExperienceCard from "./ExperienceCard";
 import SkillsCard from "./SkillsCard";
 import EducationCard from "./EducationCard";
+import Resume from "./Resume";
+import { useState } from "react";
 
 function App() {
+  const [personalInfo, setPersonalInfo] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    phone: "",
+  });
+
+  const educationItems = [
+    {
+      school: "University of Pennsylvania",
+      grad: "",
+      degree: "",
+      desc: "",
+      id: uuidv4(),
+    },
+  ];
+  const [educationInfo, setEducationInfo] = useState(educationItems);
+
+  const experienceItems = [
+    {
+      jobTitle: "Software Engineer",
+      employer: "Google",
+      id: uuidv4(),
+    },
+  ];
+  const [experienceInfo, setExperienceInfo] = useState(experienceItems);
+
+  const skillsItems = [
+    {
+      skill: "javascript",
+      id: uuidv4(),
+    },
+  ];
+  const [skillsInfo, setSkillsInfo] = useState(skillsItems);
+
   return (
     <>
       <Grid templateColumns="repeat(9, 1fr)" bg="gray.50">
         <GridItem
           as="aside"
-          colSpan={{ base: 5 }}
+          colSpan={{ base: 9, lg: 5 }}
           height={{ base: "100vh" }}
           padding={"40px"}
           overflowY={"auto"}
@@ -39,42 +78,90 @@ function App() {
                 rowGap={"20px"}
               >
                 <FormControl variant="floating" id="first-name" isRequired>
-                  <Input placeholder=" " variant="outline" bg={"gray.50"} />
+                  <Input
+                    placeholder=" "
+                    variant="outline"
+                    bg={"gray.50"}
+                    value={personalInfo.firstName}
+                    onChange={(e) => {
+                      setPersonalInfo({
+                        ...personalInfo,
+                        firstName: e.target.value,
+                      });
+                    }}
+                  />
                   <FormLabel>First name</FormLabel>
                 </FormControl>
 
                 <FormControl variant="floating" id="last-name" isRequired>
-                  <Input placeholder=" " variant="outline" bg={"gray.50"} />
+                  <Input
+                    placeholder=" "
+                    variant="outline"
+                    bg={"gray.50"}
+                    value={personalInfo.lastName}
+                    onChange={(e) => {
+                      setPersonalInfo({
+                        ...personalInfo,
+                        lastName: e.target.value,
+                      });
+                    }}
+                  />
                   <FormLabel>Last name</FormLabel>
                 </FormControl>
 
                 <FormControl variant="floating" id="email" isRequired>
-                  <Input placeholder=" " variant="outline" bg={"gray.50"} />
+                  <Input
+                    placeholder=" "
+                    variant="outline"
+                    bg={"gray.50"}
+                    value={personalInfo.email}
+                    onChange={(e) => {
+                      setPersonalInfo({
+                        ...personalInfo,
+                        email: e.target.value,
+                      });
+                    }}
+                  />
                   <FormLabel>Email</FormLabel>
                 </FormControl>
 
                 <FormControl variant="floating" id="phone" isRequired>
-                  <Input placeholder=" " variant="outline" bg={"gray.50"} />
+                  <Input
+                    placeholder=" "
+                    variant="outline"
+                    bg={"gray.50"}
+                    value={personalInfo.phone}
+                    onChange={(e) => {
+                      setPersonalInfo({
+                        ...personalInfo,
+                        phone: e.target.value,
+                      });
+                    }}
+                  />
                   <FormLabel>Phone</FormLabel>
                 </FormControl>
               </Grid>
             </Card>
 
-            <EducationCard />
-            <ExperienceCard />
-            <SkillsCard />
-            
+            <EducationCard info={educationInfo} setInfo={setEducationInfo} />
+            <ExperienceCard info={experienceInfo} setInfo={setExperienceInfo} />
+            <SkillsCard info={skillsInfo} setInfo={setSkillsInfo} />
           </Flex>
         </GridItem>
-        <GridItem bg={"gray.700"} as="main" colSpan={{ base: 4 }}>
+        <GridItem bg={"gray.700"} as="main" colSpan={{ base: 9, lg: 4 }}>
           <Center>
             <Flex p={"40px"} flexDir={"column"} gap="30px">
               <Box
-                width={"54vh"}
+                width={{ base: "min(54vh, 460px)", xl: "54vh" }}
                 height={"70vh"}
                 bg="white"
                 borderRadius={"6px"}
-              ></Box>
+                overflowY={"auto"}
+              >
+                <Resume
+                  info={{ personalInfo, educationInfo, experienceInfo, skillsInfo}}
+                />
+              </Box>
               <Button colorScheme="teal" width={"180px"} alignSelf={"center"}>
                 Download as PDF
               </Button>

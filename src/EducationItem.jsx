@@ -15,15 +15,25 @@ import {
   Button,
 } from "@chakra-ui/react";
 
-import { useState } from "react";
-
 function EducationItem(props) {
-  const [schoolName, setSchoolName] = useState(
-    props.school == null ? "" : props.school
-  );
   let handleSchoolNameChange = (e) => {
     let inputValue = e.target.value;
-    setSchoolName(inputValue);
+    props.setInfo({ ...props.info, school: inputValue });
+  };
+
+  let handleDateChange = (e) => {
+    let inputValue = e.target.value;
+    props.setInfo({ ...props.info, grad: inputValue });
+  };
+
+  let handleDegreeChange = (e) => {
+    let inputValue = e.target.value;
+    props.setInfo({ ...props.info, degree: inputValue });
+  };
+
+  let handleDescriptionChange = (e) => {
+    let inputValue = e.target.value;
+    props.setInfo({ ...props.info, desc: inputValue });
   };
 
   return (
@@ -34,7 +44,9 @@ function EducationItem(props) {
             <AccordionButton>
               <Box as="span" flex="1" textAlign="left">
                 <Heading as="h2" size="sm">
-                  {schoolName != "" ? schoolName : "Unknown School"}
+                  {props.info.school != ""
+                    ? props.info.school
+                    : "Unknown School"}
                 </Heading>
               </Box>
               <AccordionIcon />
@@ -47,7 +59,7 @@ function EducationItem(props) {
                   placeholder=" "
                   variant="outline"
                   bg={"gray.50"}
-                  value={schoolName}
+                  value={props.info.school}
                   onChange={handleSchoolNameChange}
                 />
                 <FormLabel>School</FormLabel>
@@ -60,24 +72,27 @@ function EducationItem(props) {
                   type="date"
                   variant="outline"
                   bg={"gray.50"}
+                  onChange={handleDateChange}
                 />
                 <FormLabel>Graduation Date</FormLabel>
               </FormControl>
 
               <FormControl variant="floating" gridColumn="1/-1" isRequired>
-                <Input placeholder=" " variant="outline" bg={"gray.50"} />
+                <Input placeholder=" " variant="outline" bg={"gray.50"} onChange={handleDegreeChange}/>
                 <FormLabel>Degree</FormLabel>
               </FormControl>
 
               <FormControl variant="floating" gridColumn="1/-1" isRequired>
-                <Textarea variant="outline" bg={"gray.50"} />
+                <Textarea variant="outline" bg={"gray.50"} onChange={handleDescriptionChange} />
                 <FormLabel>Description</FormLabel>
               </FormControl>
             </Grid>
             <Flex mt={"20px"} justifyContent={"right"}>
               <Button
                 colorScheme="red"
-                onClick={() => {props.removeHandle(props.id)}}
+                onClick={() => {
+                  props.removeHandle(props.id);
+                }}
               >
                 Remove
               </Button>

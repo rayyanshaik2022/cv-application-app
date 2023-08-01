@@ -1,17 +1,11 @@
-import { Card, Heading, Button, Box } from "@chakra-ui/react";
+import { Card, Heading, Button } from "@chakra-ui/react";
 import ExperienceItem from "./ExperienceItem";
-import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 
-function ExperienceCard() {
-  const experienceItems = [
-    {
-      jobTitle: "Software Engineer",
-      employer: "Google",
-      id: uuidv4(),
-    },
-  ];
-  const [expItems, setExpItems] = useState(experienceItems);
+function ExperienceCard(props) {
+  
+  const expItems = props.info;
+  const setExpItems = props.setInfo;
 
   let handleAddExpItem = () => {
     setExpItems([
@@ -45,9 +39,10 @@ function ExperienceCard() {
       ))}
       <Button
         colorScheme="blue"
-        size={"sm"}
-        width={"180px"}
+        size={{base: "xs", sm: "sm"}}
+        width={{base: "150px", sm: "180px"}}
         onClick={handleAddExpItem}
+        
       >
         + Add Work Experience
       </Button>

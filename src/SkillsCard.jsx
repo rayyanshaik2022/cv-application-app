@@ -1,18 +1,10 @@
 import { Card, Heading, Button } from "@chakra-ui/react";
 import SkillsItem from "./SkillsItem";
 import { v4 as uuidv4 } from "uuid";
-import { useState } from "react";
 
-function SkillsCard() {
-
-  const skillsItems = [
-    {
-      skill: "javascript",
-      id: uuidv4(),
-    },
-  ];
-
-  const [skillsList, setSkillsList] = useState(skillsItems);
+function SkillsCard(props) {
+  let skillsList = props.info;
+  let setSkillsList = props.setInfo;
 
   let handleAddSkillBtn = () => {
     let newId = uuidv4();
@@ -26,10 +18,8 @@ function SkillsCard() {
   };
 
   let handleRemoveSkill = (id) => {
-    setSkillsList(
-        skillsList.filter(item => item.id != id)
-    );
-  }
+    setSkillsList(skillsList.filter((item) => item.id != id));
+  };
 
   return (
     <Card p={"20px"}>
@@ -37,14 +27,25 @@ function SkillsCard() {
         Skills
       </Heading>
 
-      {skillsList.map((item) => ( 
-        <SkillsItem key={item.id} id={item.id} skill={item.skill} removeHandle={handleRemoveSkill}/>
+      {skillsList.map((item) => (
+        <SkillsItem
+          key={item.id}
+          id={item.id}
+          skill={item.skill}
+          removeHandle={handleRemoveSkill}
+          setSkill={(newObj) => {
+            setSkillsList(
+              skillsList.map((e) => (e.id === item.id ? newObj : e))
+            )
+          }}
+          getSkill={skillsList.find((e) => e.id == item.id)}
+        />
       ))}
 
       <Button
         colorScheme="blue"
-        size={"sm"}
-        width={"100px"}
+        size={{ base: "xs", sm: "sm" }}
+        width={{ base: "80px", sm: "100px" }}
         onClick={handleAddSkillBtn}
       >
         + Add Skill
