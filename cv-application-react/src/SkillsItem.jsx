@@ -2,15 +2,20 @@ import { Flex, Input, Button } from "@chakra-ui/react";
 import { useState } from "react";
 
 function SkillsItem(props) {
-  
-    const [inputValue, setInputValue] = useState(props.skill != null ? props.skill : "");
+  const [inputValue, setInputValue] = useState(
+    props.skill != null ? props.skill : ""
+  );
 
-    let inputHandler = (e) => {
-        let val = e.target.value;
-        setInputValue(val);
-    }
-  
-    return (
+  let inputHandler = (e) => {
+    let val = e.target.value;
+    setInputValue(val);
+    props.setSkill({
+      ...props.getSkill(),
+      skill: val,
+    });
+  };
+
+  return (
     <Flex flexDir={"column"} gap={"20px"} mb={"20px"}>
       <Flex gap={"12px"}>
         <Input
@@ -20,7 +25,14 @@ function SkillsItem(props) {
           value={inputValue}
           onChange={inputHandler}
         />
-        <Button colorScheme="red" onClick={() => {props.removeHandle(props.id)}}>Remove</Button>
+        <Button
+          colorScheme="red"
+          onClick={() => {
+            props.removeHandle(props.id);
+          }}
+        >
+          Remove
+        </Button>
       </Flex>
     </Flex>
   );
